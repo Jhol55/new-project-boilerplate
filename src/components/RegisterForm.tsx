@@ -1,9 +1,12 @@
-import { registerFormSchema } from "@/schemas/registerFormSchema"
+import React, { useId } from "react"
+import { registerFormSchema } from "@/schemas/registerForm.schema"
 import { ControlledForm } from "./ui/ControlledForm"
 import { ControlledInput } from "./ui/ControlledInput"
 import { cn } from "@/lib/utils"
-import React from "react"
-import { AnimatedGradientButton } from "./ui/AnimatedGradientButton"
+import { FieldValues, UseFormSetError } from "react-hook-form"
+import { userService } from "@/services/user"
+import { ControlledAnimatedGradientButton } from "./ui/ControlledAnimatedGradientButton"
+import { useRouter } from "next/navigation";
 
 
 interface IRegisterForm {
@@ -11,7 +14,19 @@ interface IRegisterForm {
     children?: React.ReactNode
 }
 
+interface IInputs {
+    label?: string
+    placeholder?: string
+    fieldName: string
+    type?: string
+    className?: string
+    includeOnSubmit?: boolean
+}
+
 export const RegisterForm = ({ className, children }: IRegisterForm) => {
+    const baseId = useId();
+    const router = useRouter();
+    
     const inputs = [
         {
             label: "Nome de usuário",
@@ -36,38 +51,66 @@ export const RegisterForm = ({ className, children }: IRegisterForm) => {
             placeholder: "••••••••••••",
             fieldName: "repeatPassword",
             type: "password",
+            includeOnSubmit: false
         },
     ];
+
+
+    const handleSubmit = async (data: FieldValues, setError: UseFormSetError<FieldValues>) => {
+        const response = await userService.register(data);
+        
+        if (!response.success) {
+            setError("email", {
+                message: "Email já cadastrado"
+            });
+            return;
+        }
+
+        router.push("/confirm");
+    };
 
     return (
         <ControlledForm
             className={cn("flex flex-col gap-2 w-full h-[90%] overflow-y-auto md:rounded-r-3xl px-4 -z-50", className)}
             zodSchema={registerFormSchema}
-            onSubmit={() => console.log(1)}
+            onSubmit={handleSubmit}
         >
             <div className="h-full" /> {/* justify-center when overflow */}
 
-            {inputs.map((input, index) => (
+            {inputs.map((input: IInputs, index) => (
                 <React.Fragment key={index}>
-                    <label key={index} htmlFor={input.fieldName} className="w-full text-sm font-medium">
+
+                    <label htmlFor={`${baseId}-${index}`} className="w-full text-sm font-medium">
                         {input.label}
                     </label>
+
                     <ControlledInput
-                        id={input.fieldName}
+                        id={`${baseId}-${index}`}
                         type={input.type}
                         placeholder={input.placeholder}
                         fieldName={input.fieldName}
                         className="w-full rounded-md border border-gray-300 bg-gray-100 p-2.5 text-black outline-none placeholder:text-black/40 focus:ring focus:ring-emerald-400 dark:border-gray-500 dark:bg-gray-300 sm:text-sm"
+                        onChange={(e, setForm) => {
+                            if (input.includeOnSubmit !== false) {
+                                setForm((prev) => ({
+                                    ...prev,
+                                    [input.fieldName]: e.target.value,
+                                }));
+                            }
+                        }}
                     />
                 </React.Fragment>
             ))}
 
-            <AnimatedGradientButton className="w-full mt-2 rounded-md px-5 py-2.5 text-center text-sm font-medium outline-none" type="submit">
+            <ControlledAnimatedGradientButton
+                className="w-full mt-2 rounded-md px-5 py-2.5 text-center text-sm font-medium outline-none"
+                type="submit"
+            >
                 Registrar
-            </AnimatedGradientButton>
-            
+            </ControlledAnimatedGradientButton>
+
             {children}
-            
+
             <div className="h-full" /> {/* justify-center when overflow */}
         </ControlledForm>
     )

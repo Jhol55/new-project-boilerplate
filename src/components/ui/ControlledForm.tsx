@@ -1,16 +1,19 @@
-"use client"
+"use client";
 
-import React, { createContext, FormHTMLAttributes, useContext } from 'react';
-import { useForm, UseFormRegister, FieldErrors, FieldValues, UseFormWatch } from 'react-hook-form';
+import React, { createContext, Dispatch, FormHTMLAttributes, useContext, useState } from 'react';
+import { useForm, UseFormRegister, FieldErrors, FieldValues, UseFormSetError } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ZodSchema } from 'zod';
 
-
 interface IFormContext {
     register: UseFormRegister<FieldValues>;
+    setError: UseFormSetError<FieldValues>;
     errors: FieldErrors<FieldValues>;
     maskFunctions: Record<string, (e: React.ChangeEvent<HTMLInputElement>) => void> | undefined;
-    watch: UseFormWatch<FieldValues>;
+    form: object;
+    setForm: Dispatch<React.SetStateAction<object>>;
+    isSubmitting: boolean;
+    isSubmitSuccessful: boolean;
 }
 
 const FormContext = createContext<IFormContext | null>(null);
@@ -18,14 +21,13 @@ const FormContext = createContext<IFormContext | null>(null);
 export const useControlledFormContext = () => {
     const context = useContext(FormContext);
     if (!context) {
-        throw new Error('useFormContext must be used within a FormProvider');
+        throw new Error('useControlledFormContext must be used within a FormProvider');
     }
     return context;
 };
 
-
-interface IForm<T> extends FormHTMLAttributes<HTMLFormElement> {
-    onSubmit?: () => void;
+interface IForm<T> extends Omit<FormHTMLAttributes<HTMLFormElement>, 'onSubmit'> {
+    onSubmit?: (data: FieldValues, setError: UseFormSetError<FieldValues>) => void;
     onChange?: (data: FieldValues) => void;
     children: React.ReactNode;
     zodSchema?: ZodSchema<T>;
@@ -40,21 +42,22 @@ export const ControlledForm = <T,>({
     maskFunctions,
     ...props
 }: IForm<T>) => {
-    const { register, handleSubmit, watch, formState: { errors } } = useForm({
+    const { register, handleSubmit, setError, formState: { errors, isSubmitting, isSubmitSuccessful } } = useForm({
         resolver: zodSchema ? zodResolver(zodSchema) : undefined,
     });
 
+    const [form, setForm] = useState({});
+
     return (
-        <FormContext.Provider value={{ register, errors, watch, maskFunctions }}>
+        <FormContext.Provider value={{ register, setError, errors, maskFunctions, form, setForm, isSubmitting, isSubmitSuccessful }}>
             <form
-                onSubmit={onSubmit && handleSubmit(onSubmit)}
-                onChange={() => onChange && onChange(watch() as FieldValues)}
-                autoComplete={props?.autoComplete || "off"}
                 {...props}
+                onSubmit={onSubmit && handleSubmit(() => onSubmit(form, setError))}
+                onChange={() => onChange && onChange(form)}
+                autoComplete={props.autoComplete || "off"}
             >
                 {children}
             </form>
         </FormContext.Provider>
     );
 };
-
