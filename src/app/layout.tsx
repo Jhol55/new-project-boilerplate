@@ -18,7 +18,7 @@ export default function RootLayout({
         className="antialiased"
         suppressHydrationWarning
       >
-        <div className="opacity-40">
+        <div className="opacity-40 -z-50 pointer-events-none">
           <Image src="/background2.jpg" fill alt="" className="object-cover" />
         </div>
         {children}

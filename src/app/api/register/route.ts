@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ success: false })
   }
 
-  sessionService.login(requestData);
+  sessionService.createSession(requestData);
 
   return NextResponse.json({ success: true });
 };

@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
 
     const success = authService.verifyPassword(requestData.password, data?.password);
     if (success) {
-        await sessionService.login(requestData);    
+        await sessionService.createSession(requestData);    
     }
     
     return NextResponse.json({ success });

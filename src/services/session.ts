@@ -20,7 +20,7 @@ export class sessionService {
         return payload;
     }
 
-    public static async login(formData: { email: string, remember: boolean }): Promise<void> {
+    public static async createSession(formData: { email: string, remember: boolean }): Promise<void> {
         const user = { email: formData.email };
         const remember = formData.remember;
         const time = remember ? 7 * 24 * 60 * 60 : 60 * 60; // 7 dias ou 1 hora
@@ -33,7 +33,7 @@ export class sessionService {
         });
     }
 
-    public static async logout(): Promise<void> {
+    public static async deleteSession(): Promise<void> {
         cookies().delete("session");
     }
 
