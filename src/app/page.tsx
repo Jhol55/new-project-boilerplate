@@ -1,13 +1,14 @@
 "use client";
 
-import { AnimatedGradientButton } from "@/components/ui/AnimatedGradientButton";
-import { FlipCard } from "@/components/ui/FlipCard";
-import { LoginForm } from "@/components/LoginForm";
-import { RegisterForm } from "@/components/RegisterForm";
+import { AnimatedGradientButton } from "@/components/custom-ui/AnimatedGradientButton";
+import { FlipCard } from "@/components/custom-ui/FlipCard";
+import { LoginForm } from "@/components/forms/LoginForm";
+import { RegisterForm } from "@/components/forms/RegisterForm";
+import Image from "next/image";
 
 export default function Home() {
   return (
-    <main className="flex justify-center items-center w-screen h-screen overflow-hidden p-10">
+    <main className="relative flex justify-center items-center w-screen h-screen overflow-hidden p-10">
       <section className="flex md:w-1/2 xl:w-1/3 justify-center items-center h-screen relative">
         <LoginForm className="md:flex w-full justify-center items-center hidden bg-zinc-900 backdrop-blur-lg z-1 border border-r-0 border-zinc-800" />
       </section>
@@ -72,6 +73,7 @@ export default function Home() {
         />
         <RegisterForm className="md:flex w-full items-center hidden bg-zinc-900 backdrop-blur-lg border border-l-0 border-zinc-800" />
       </section>
+        <Image src="/background.jpg" fill alt="" className="object-cover -z-50 opacity-40" />
     </main>
   );
 }

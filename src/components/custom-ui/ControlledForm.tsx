@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, Dispatch, FormHTMLAttributes, useContext, useState } from 'react';
+import React, { createContext, Dispatch, FormHTMLAttributes, useContext, useEffect, useState } from 'react';
 import { useForm, UseFormRegister, FieldErrors, FieldValues, UseFormSetError } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ZodSchema } from 'zod';
@@ -48,13 +48,19 @@ export const ControlledForm = <T,>({
 
     const [form, setForm] = useState({});
 
+    useEffect(() => {
+        if (onChange) {
+            onChange(form);
+            console.log(form)
+        }
+    }, [form, onChange]);
+
     return (
         <FormContext.Provider value={{ register, setError, errors, maskFunctions, form, setForm, isSubmitting, isSubmitSuccessful }}>
             <form
                 {...props}
                 onSubmit={onSubmit && handleSubmit(() => onSubmit(form, setError))}
-                onChange={() => onChange && onChange(form)}
-                autoComplete={props.autoComplete || "off"}
+                autoComplete={props.autoComplete || "on"}
             >
                 {children}
             </form>

@@ -1,11 +1,11 @@
 import React, { useId } from "react"
 import { registerFormSchema } from "@/schemas/registerForm.schema"
-import { ControlledForm } from "./ui/ControlledForm"
-import { ControlledInput } from "./ui/ControlledInput"
+import { ControlledForm } from "@/components/custom-ui/ControlledForm"
+import { ControlledInput } from "@/components/custom-ui/ControlledInput"
 import { cn } from "@/lib/utils"
 import { FieldValues, UseFormSetError } from "react-hook-form"
 import { userService } from "@/services/user"
-import { ControlledAnimatedGradientButton } from "./ui/ControlledAnimatedGradientButton"
+import { ControlledAnimatedGradientButton } from "@/components/custom-ui/ControlledAnimatedGradientButton"
 import { useRouter } from "next/navigation";
 
 

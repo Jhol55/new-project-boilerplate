@@ -1,5 +1,5 @@
-import { ControlledForm } from "./ui/ControlledForm"
-import { ControlledInput } from "./ui/ControlledInput"
+import { ControlledForm } from "@/components/custom-ui/ControlledForm"
+import { ControlledInput } from "@/components/custom-ui/ControlledInput"
 import { cn } from "@/lib/utils"
 import React, { useId } from "react"
 import Link from "next/link"
@@ -7,7 +7,7 @@ import { FieldValues, UseFormSetError } from "react-hook-form"
 import { userService } from "@/services/user"
 import { loginFormSchema } from "@/schemas/loginForm.schema"
 import { useRouter } from "next/navigation";
-import { ControlledAnimatedGradientButton } from "./ui/ControlledAnimatedGradientButton"
+import { ControlledAnimatedGradientButton } from "@/components/custom-ui/ControlledAnimatedGradientButton"
 
 interface ILoginForm {
     className?: string,

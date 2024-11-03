@@ -1,15 +1,16 @@
 "use client"
 
-import { api } from "@/services/api"
+import Image from "next/image";
 
 export default function Index() {
 
-    const handle = async () => {
-        const response = api.post("/logout")
-        console.log(response)
-    }
-
     return (
-        <div onClick={handle} className="cursor-pointer border-2 h-10 z-50">ffddf</div>
+        <main className="relative flex justify-center items-center h-screen z-50">
+            <section className="w-1/3 h-[90%] rounded-3xl bg-zinc-900">
+
+            </section>
+            <Image src="/background.jpg" fill alt="" className="object-cover -z-50 opacity-40" />
+        </main>
+        
     )
 }
