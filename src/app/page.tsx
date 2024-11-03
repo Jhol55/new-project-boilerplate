@@ -22,12 +22,24 @@ export default function Home() {
               <LoginForm className="md:hidden flex items-center">
                 <div className="flex items-center mt-2">
                   <p className="text-md font-medium">Não tem uma conta?</p>
-                  <button className="text-md font-medium ml-2 underline" type="button" onClick={() => setIsFlipped(!isFlipped)}>Registre-se</button>
+                  <button
+                    className="text-md font-medium ml-2 underline"
+                    type="button"
+                    onClick={() => setIsFlipped(!isFlipped)}
+                  >
+                    Registre-se
+                  </button>
                 </div>
               </LoginForm>
               <div className="md:flex md:flex-col hidden">
                 <h1 className="text-lg font-medium mb-2">Não tem uma conta?</h1>
-                <AnimatedGradientButton className="mt-2 rounded-md px-5 py-2.5 text-center text-sm font-medium outline-none" type="button" onClick={() => setIsFlipped(!isFlipped)}>Registre-se</AnimatedGradientButton>
+                <AnimatedGradientButton
+                  className="mt-2 rounded-md px-5 py-2.5 text-center text-sm font-medium outline-none"
+                  type="button"
+                  onClick={() => setIsFlipped(!isFlipped)}
+                >
+                  Registre-se
+                </AnimatedGradientButton>
               </div>
             </>
           )}
@@ -36,12 +48,24 @@ export default function Home() {
               <RegisterForm className="md:hidden flex items-center">
                 <div className="flex items-center mt-2">
                   <p className="text-md font-medium">Já possui uma conta?</p>
-                  <button className="text-md font-medium ml-2 underline" type="button" onClick={() => setIsFlipped(!isFlipped)}>Login</button>
+                  <button
+                    className="text-md font-medium ml-2 underline"
+                    type="button"
+                    onClick={() => setIsFlipped(!isFlipped)}
+                  >
+                    Login
+                  </button>
                 </div>
               </RegisterForm>
               <div className="md:flex flex-col hidden">
                 <h1 className="text-lg font-medium mb-2">Já possui uma conta?</h1>
-                <AnimatedGradientButton className="mt-2 rounded-md px-5 py-2.5 text-center text-sm font-medium outline-none" type="button" onClick={() => setIsFlipped(!isFlipped)}>Login</AnimatedGradientButton>
+                <AnimatedGradientButton
+                  className="mt-2 rounded-md px-5 py-2.5 text-center text-sm font-medium outline-none"
+                  type="button"
+                  onClick={() => setIsFlipped(!isFlipped)}
+                >
+                  Login
+                </AnimatedGradientButton>
               </div>
             </>
           )}
