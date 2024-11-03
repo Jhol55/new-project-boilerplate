@@ -19,11 +19,10 @@ export const ControlledAnimatedGradientButton = ({ children, className, ...props
     useEffect(() => {
         const timeout = setTimeout(() => {
             setIsLoading(isSubmitting || isSubmitSuccessful);        
-        }, 100);
+        }, 400);
 
-        if (Object.keys(errors).length === 0) {
-            return clearTimeout(timeout);
-        }
+        return () => clearTimeout(timeout)
+
     }, [isSubmitSuccessful, isSubmitting, errors]);
     
     return (
@@ -35,7 +34,7 @@ export const ControlledAnimatedGradientButton = ({ children, className, ...props
                 className)}
         >
             <div className="flex justify-center items-center">
-                {<Loader2 className={cn(isLoading ? "animate-spin": "hidden", "h-4")} />}
+                <Loader2 className={cn(isLoading ? "animate-spin": "hidden", "h-4")} />
                 {children}
             </div>
         </button>

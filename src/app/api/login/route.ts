@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabase } from "@/services/supabase";
-import { authService } from "@/services/auth";
+import { userService } from "@/services/user";
 import { sessionService } from "@/services/session";
 
 export async function POST(request: NextRequest) {
@@ -12,9 +12,9 @@ export async function POST(request: NextRequest) {
        .eq("email", requestData.email)
        .single();
 
-    const success = authService.verifyPassword(requestData.password, data?.password);
+    const success = userService.verifyPassword(requestData.password, data?.password);
     if (success) {
-        await sessionService.login(requestData);    
+        await sessionService.createSession(requestData);    
     }
     
     return NextResponse.json({ success });

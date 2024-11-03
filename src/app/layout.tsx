@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Image from "next/image";
+import { UserProvider } from "@/contexts/useUserContext";
+
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,10 +19,9 @@ export default function RootLayout({
         className="antialiased"
         suppressHydrationWarning
       >
-        <div className="opacity-40">
-          <Image src="/background2.jpg" fill alt="" className="object-cover" />
-        </div>
-        {children}
+        <UserProvider>
+          {children}
+        </UserProvider>
       </body>
     </html>
   );
