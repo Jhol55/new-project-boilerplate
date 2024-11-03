@@ -32,7 +32,7 @@ export const ControlledInputOTP = ({ fieldName, length, containerClassName, clas
                         <InputOTPSlot
                             key={index}
                             index={index}
-                            className="ring-emerald-400"
+                            className="ring-emerald-400 text-lg"
                         />
                     ))}
                 </InputOTPGroup>
