@@ -1,4 +1,4 @@
-import { useEffect, useState, forwardRef } from "react";
+import { useState, forwardRef, useMemo } from "react";
 import { Button } from "./button";
 import { MultiVariantButtonProps } from "@/types/button.type";
 import { Loader2 } from "lucide-react";
@@ -10,15 +10,15 @@ const ControlledButton = forwardRef<HTMLButtonElement, MultiVariantButtonProps>(
     ({ type = "submit", children, ...props }, ref) => {
 
         const [isLoading, setIsLoading] = useState(false);
-        const { isSubmitting, isSubmitSuccessful, errors } = useControlledFormContext();
+        const { isSubmitting, isSubmitSuccessful } = useControlledFormContext();
 
-        useEffect(() => {
+        useMemo(() => {
             const timeout = setTimeout(() => {
                 setIsLoading(isSubmitting || isSubmitSuccessful);        
             }, 400);
 
             return () => clearTimeout(timeout);
-        }, [isSubmitSuccessful, isSubmitting, errors]);
+        }, [isSubmitSuccessful, isSubmitting]);
 
         return (
             <Button
