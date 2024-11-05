@@ -7,7 +7,8 @@ import { FieldValues, UseFormSetError } from "react-hook-form"
 import { userService } from "@/services/user"
 import { loginFormSchema } from "@/schemas/loginForm.schema"
 import { useRouter } from "next/navigation";
-import { ControlledAnimatedGradientButton } from "@/components/custom-ui/ControlledAnimatedGradientButton"
+import { buttonColor } from "@/constants/colors"
+import { ControlledButton } from "../custom-ui/controlled-button"
 
 interface ILoginForm {
     className?: string,
@@ -118,12 +119,12 @@ export const LoginForm = ({ className, children }: ILoginForm) => {
                 </Link>
             </div>
 
-            <ControlledAnimatedGradientButton
-                className="w-full mt-2 rounded-md px-5 py-2.5 text-center text-sm font-medium outline-none"
-                type="submit"
+            <ControlledButton
+                variant="gradient"
+                bgHexColor={buttonColor.primary}
             >
                 Login
-            </ControlledAnimatedGradientButton>
+            </ControlledButton>
 
             {children}
 

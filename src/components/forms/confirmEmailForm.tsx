@@ -1,11 +1,12 @@
 import { confirmEmailFormSchema } from "@/schemas/confirmEmailForm.schema"
-import { ControlledAnimatedGradientButton } from "../custom-ui/ControlledAnimatedGradientButton"
 import { ControlledForm } from "../custom-ui/ControlledForm"
 import { ControlledInputOTP } from "../custom-ui/ControlledInputOTP"
 import { FieldValues, UseFormSetError } from "react-hook-form"
 import { useRouter } from "next/navigation"
 import { userService } from "@/services/user"
 import { useUser } from "@/hooks/useUser"
+import { ControlledButton } from "../custom-ui/controlled-button"
+import { buttonColor } from "@/constants/colors"
 
 
 export const ConfirmEmailForm = () => {
@@ -27,7 +28,6 @@ export const ConfirmEmailForm = () => {
 
     return (
         <ControlledForm
-            className="w-full px-2.5"
             zodSchema={confirmEmailFormSchema}
             onSubmit={handleSumit}
         >
@@ -35,12 +35,12 @@ export const ConfirmEmailForm = () => {
                 length={6}
                 fieldName="validationCode"
             />
-            <ControlledAnimatedGradientButton
-                className="w-full rounded-md px-5 py-2.5 text-center text-sm font-medium outline-none"
-                type="submit"
+            <ControlledButton
+                variant="gradient"
+                bgHexColor={buttonColor.primary}
             >
                 Confirmar
-            </ControlledAnimatedGradientButton>
+            </ControlledButton>
         </ControlledForm>
     )
 }
