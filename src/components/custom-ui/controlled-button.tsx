@@ -3,7 +3,7 @@ import { Button } from "./button";
 import { MultiVariantButtonProps } from "@/types/button.type";
 import { Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useControlledFormContext } from "./ControlledForm";
+import { useControlledFormContext } from "./controlled-form";
 
 
 const ControlledButton = forwardRef<HTMLButtonElement, MultiVariantButtonProps>(

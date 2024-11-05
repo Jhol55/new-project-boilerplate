@@ -14,7 +14,7 @@ export const FlipCard = ({ renderFront, renderBack, className }: IFlipCard) => {
 
     return (
         <div
-            className="absolute w-full h-[90%] md:origin-top-left origin-center"
+            className="absolute w-full h-full md:origin-top-left origin-center"
             style={{
                 transformStyle: "preserve-3d",
                 transform: isFlipped ? "rotateY(-180deg)" : "rotateY(0deg)",
@@ -23,8 +23,8 @@ export const FlipCard = ({ renderFront, renderBack, className }: IFlipCard) => {
 
             <div
                 className={cn(
-                    "absolute flex flex-col justify-center items-center backdrop-blur-lg border md:border-l-0 border-zinc-800",
-                    "rounded-r-3xl md:rounded-l-none rounded-l-3xl w-[calc(100%+4px)] h-full shadow-xl z-50",
+                    "absolute flex flex-col justify-center items-center backdrop-blur-lg",
+                    "rounded-r-3xl md:rounded-l-none rounded-l-3xl w-full h-full z-50",
                     className
                 )}
                 style={{ backfaceVisibility: "hidden" }}
@@ -34,8 +34,8 @@ export const FlipCard = ({ renderFront, renderBack, className }: IFlipCard) => {
             
             <div
                 className={cn(
-                    "absolute flex flex-col justify-center items-center backdrop-blur-lg border md:border-r-0 border-zinc-800",
-                    "rounded-l-3xl md:rounded-r-none rounded-r-3xl w-[calc(100%+4px)] h-full shadow-xl z-50",
+                    "absolute flex flex-col justify-center items-center backdrop-blur-lg",
+                    "rounded-l-3xl md:rounded-r-none rounded-r-3xl w-full h-full z-50",
                     className)}
                 style={{
                     backfaceVisibility: "hidden",

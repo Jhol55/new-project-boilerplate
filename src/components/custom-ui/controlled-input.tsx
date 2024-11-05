@@ -1,16 +1,16 @@
 "use client";
 
-import { ChangeEvent, Dispatch, InputHTMLAttributes } from 'react';
-import { useControlledFormContext } from './ControlledForm';
+import { ChangeEvent, InputHTMLAttributes } from 'react';
+import { useControlledFormContext } from './controlled-form';
 
 interface IFormInput extends Omit<InputHTMLAttributes<HTMLInputElement>, "onChange"> {
     fieldName: keyof Record<string, (e: ChangeEvent<HTMLInputElement>) => void>;
-    onChange?: (e: ChangeEvent<HTMLInputElement>, setForm: Dispatch<React.SetStateAction<object>>) => void;
+    includeInForm?: boolean;
 }
 
 export const ControlledInput = ({
     fieldName,
-    onChange,
+    includeInForm = true,
     ...props
 }: IFormInput) => {
     const { register, errors, maskFunctions, setForm } = useControlledFormContext();
@@ -22,9 +22,16 @@ export const ControlledInput = ({
                 {...register(fieldName)}
                 autoComplete={props?.autoComplete || "on"}
                 onInput={(e: React.ChangeEvent<HTMLInputElement>) => maskFunctions && maskFunctions[fieldName](e)}
-                onChange={(e: ChangeEvent<HTMLInputElement>) => onChange && onChange(e, setForm)}
-            />      
-            <p className='text-red-500 min-h-6 mb-2 text-sm self-start'>{errors[fieldName]?.message as string}</p>
+                onChange={(e) => {
+                    if (includeInForm) {
+                        setForm((prev) => ({
+                            ...prev,
+                            [fieldName]: e.target.value,
+                        }));
+                    }
+                }}
+            />
+            <p className='text-red-500 min-h-6 mb-2 text-sm self-start leading-none'>{errors[fieldName]?.message as string}</p>
         </>
     );
 };
