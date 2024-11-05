@@ -1,13 +1,14 @@
 import React, { useId } from "react"
 import { registerFormSchema } from "@/schemas/registerForm.schema"
-import { ControlledForm } from "@/components/custom-ui/ControlledForm"
-import { ControlledInput } from "@/components/custom-ui/ControlledInput"
+import { ControlledForm } from "@/components/custom-ui/controlled-form"
+import { ControlledInput } from "@/components/custom-ui/controlled-input"
 import { cn } from "@/lib/utils"
 import { FieldValues, UseFormSetError } from "react-hook-form"
 import { userService } from "@/services/user"
 import { useRouter } from "next/navigation";
-import { buttonColor } from "@/constants/colors"
+import { backgroundColor, buttonColor } from "@/constants/colors"
 import { ControlledButton } from "../custom-ui/controlled-button"
+import { Typography } from "../custom-ui/typography"
 
 
 interface IRegisterForm {
@@ -21,7 +22,7 @@ interface IInputs {
     fieldName: string
     type?: string
     className?: string
-    includeOnSubmit?: boolean
+    includeInForm?: boolean
 }
 
 export const RegisterForm = ({ className, children }: IRegisterForm) => {
@@ -52,7 +53,7 @@ export const RegisterForm = ({ className, children }: IRegisterForm) => {
             placeholder: "••••••••••••",
             fieldName: "repeatPassword",
             type: "password",
-            includeOnSubmit: false
+            includeInForm: false
         },
     ];
 
@@ -72,7 +73,7 @@ export const RegisterForm = ({ className, children }: IRegisterForm) => {
 
     return (
         <ControlledForm
-            className={cn("flex flex-col gap-2 w-full h-[90%] overflow-y-auto md:rounded-r-3xl px-4 -z-50", className)}
+            className={cn("flex flex-col gap-2 w-full h-full overflow-y-auto md:rounded-r-3xl p-4 -z-50", backgroundColor.primary, className)}
             zodSchema={registerFormSchema}
             onSubmit={handleSubmit}
         >
@@ -81,24 +82,17 @@ export const RegisterForm = ({ className, children }: IRegisterForm) => {
             {inputs.map((input: IInputs, index) => (
                 <React.Fragment key={index}>
 
-                    <label htmlFor={`${baseId}-${index}`} className="w-full text-sm font-medium">
+                    <Typography variant="label" htmlFor={`${baseId}-${index}`}>
                         {input.label}
-                    </label>
+                    </Typography>
 
                     <ControlledInput
                         id={`${baseId}-${index}`}
                         type={input.type}
                         placeholder={input.placeholder}
                         fieldName={input.fieldName}
-                        className="w-full rounded-md border border-gray-300 bg-gray-100 p-2.5 text-black outline-none placeholder:text-black/40 focus:ring focus:ring-emerald-400 dark:border-gray-500 dark:bg-gray-300 sm:text-sm"
-                        onChange={(e, setForm) => {
-                            if (input.includeOnSubmit !== false) {
-                                setForm((prev) => ({
-                                    ...prev,
-                                    [input.fieldName]: e.target.value,
-                                }));
-                            }
-                        }}
+                        includeInForm={input.includeInForm}
+                        className="w-full rounded-md border border-gray-300 bg-gray-100 p-2.5 text-black outline-none placeholder:text-black/40 focus:ring focus:ring-emerald-400 dark:border-gray-500 dark:bg-gray-300 text-sm"           
                     />
                 </React.Fragment>
             ))}

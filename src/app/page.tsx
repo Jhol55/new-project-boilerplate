@@ -1,7 +1,8 @@
 "use client";
 
 import { Button } from "@/components/custom-ui/button";
-import { FlipCard } from "@/components/custom-ui/FlipCard";
+import { FlipCard } from "@/components/custom-ui/flip-card";
+import { Container } from "@/components/custom-ui/container";
 import { Typography } from "@/components/custom-ui/typography";
 import { LoginForm } from "@/components/forms/LoginForm";
 import { RegisterForm } from "@/components/forms/RegisterForm";
@@ -10,12 +11,11 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <main className="relative flex justify-center items-center w-screen h-screen overflow-hidden p-10">
-      <section className="flex md:w-1/2 xl:w-1/3 justify-center items-center h-screen relative">
-        <LoginForm className="md:flex w-full justify-center items-center hidden bg-zinc-900 z-1 border border-r-0 border-zinc-800" />
-      </section>
-      <section
-        className="flex md:w-1/2 xl:w-1/3 w-[90%] justify-center items-center h-screen relative"
+    <Container variant="main">
+      <Container variant="section" className="md:flex hidden md:w-1/2 xl:w-1/3">
+        <LoginForm className="md:flex hidden z-1" />
+      </Container>
+      <Container variant="section" className="md:w-1/2 xl:w-1/3"
         style={{ perspective: "1200px" }}
       >
         <FlipCard
@@ -33,7 +33,7 @@ export default function Home() {
                   </Button>
                 </div>
               </LoginForm>
-              <div className="md:flex md:flex-col hidden">
+              <div className="md:flex md:flex-col hidden gap-2">
                 <Typography variant="span" className="whitespace-nowrap">Não tem uma conta?</Typography>
                 <Button
                   variant="gradient"
@@ -58,7 +58,7 @@ export default function Home() {
                   </Button>
                 </div>
               </RegisterForm>
-              <div className="md:flex flex-col hidden">
+              <div className="md:flex flex-col hidden gap-2">
                 <Typography variant="span" className="whitespace-nowrap">Já possui uma conta?</Typography>
                 <Button
                   variant="gradient"
@@ -71,9 +71,9 @@ export default function Home() {
             </>
           )}
         />
-        <RegisterForm className="md:flex w-full items-center hidden bg-zinc-900 border border-l-0 border-zinc-800" />
-      </section>
+        <RegisterForm className="md:flex hidden" />
+      </Container>
       <Image src="/background.jpg" fill alt="" className="object-cover -z-50 opacity-40" />
-    </main>
+    </Container>
   );
 }

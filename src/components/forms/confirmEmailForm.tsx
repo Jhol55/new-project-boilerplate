@@ -1,6 +1,6 @@
 import { confirmEmailFormSchema } from "@/schemas/confirmEmailForm.schema"
-import { ControlledForm } from "../custom-ui/ControlledForm"
-import { ControlledInputOTP } from "../custom-ui/ControlledInputOTP"
+import { ControlledForm } from "../custom-ui/controlled-form"
+import { ControlledInputOTP } from "../custom-ui/controlled-input-otp"
 import { FieldValues, UseFormSetError } from "react-hook-form"
 import { useRouter } from "next/navigation"
 import { userService } from "@/services/user"
@@ -28,6 +28,7 @@ export const ConfirmEmailForm = () => {
 
     return (
         <ControlledForm
+            className="w-full px-4"
             zodSchema={confirmEmailFormSchema}
             onSubmit={handleSumit}
         >
