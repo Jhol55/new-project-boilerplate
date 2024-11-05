@@ -1,14 +1,8 @@
 import { cn } from "@/lib/utils";
 
-interface ContainerProps {
-    variant: "main" | "section" | "article";
-    color?: string;
-    className?: string;
-    children?: React.ReactNode;
-    style?: React.CSSProperties; 
-}
+import { ContainerProps } from "@/types/Container.types";
 
-export const Container = ({ variant, color, className, children, style, ...props }: ContainerProps) => {
+const Container = ({ variant, color, className, children, style, ...props }: ContainerProps) => {
     const Component = variant;
 
     const styles = {
@@ -27,3 +21,6 @@ export const Container = ({ variant, color, className, children, style, ...props
         </Component>
     );
 };
+
+
+export { Container };

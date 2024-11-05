@@ -1,7 +1,7 @@
 "use client";
 
 import { ChangeEvent, InputHTMLAttributes } from 'react';
-import { useControlledFormContext } from './controlled-form';
+import { useControlledFormContext } from './ControlledForm';
 
 interface IFormInput extends Omit<InputHTMLAttributes<HTMLInputElement>, "onChange"> {
     fieldName: keyof Record<string, (e: ChangeEvent<HTMLInputElement>) => void>;

@@ -1,9 +1,9 @@
 "use client";
 
-import { Button } from "@/components/custom-ui/button";
-import { FlipCard } from "@/components/custom-ui/flip-card";
-import { Container } from "@/components/custom-ui/container";
-import { Typography } from "@/components/custom-ui/typography";
+import { Button } from "@/components/custom-ui/Button";
+import { FlipCard } from "@/components/custom-ui/FlipCard";
+import { Container } from "@/components/custom-ui/Container";
+import { Typography } from "@/components/custom-ui/Typography";
 import { LoginForm } from "@/components/forms/LoginForm";
 import { RegisterForm } from "@/components/forms/RegisterForm";
 import { buttonColor } from "@/constants/colors";
