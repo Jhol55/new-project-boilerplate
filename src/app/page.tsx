@@ -1,16 +1,18 @@
 "use client";
 
-import { AnimatedGradientButton } from "@/components/custom-ui/AnimatedGradientButton";
+import { Button } from "@/components/custom-ui/button";
 import { FlipCard } from "@/components/custom-ui/FlipCard";
+import { Typography } from "@/components/custom-ui/typography";
 import { LoginForm } from "@/components/forms/LoginForm";
 import { RegisterForm } from "@/components/forms/RegisterForm";
+import { buttonColor } from "@/constants/colors";
 import Image from "next/image";
 
 export default function Home() {
   return (
     <main className="relative flex justify-center items-center w-screen h-screen overflow-hidden p-10">
       <section className="flex md:w-1/2 xl:w-1/3 justify-center items-center h-screen relative">
-        <LoginForm className="md:flex w-full justify-center items-center hidden bg-zinc-900 backdrop-blur-lg z-1 border border-r-0 border-zinc-800" />
+        <LoginForm className="md:flex w-full justify-center items-center hidden bg-zinc-900 z-1 border border-r-0 border-zinc-800" />
       </section>
       <section
         className="flex md:w-1/2 xl:w-1/3 w-[90%] justify-center items-center h-screen relative"
@@ -22,25 +24,24 @@ export default function Home() {
             <>
               <LoginForm className="md:hidden flex items-center">
                 <div className="flex items-center mt-2">
-                  <p className="text-md font-medium">Não tem uma conta?</p>
-                  <button
-                    className="text-md font-medium ml-2 underline"
-                    type="button"
+                  <Typography variant="span" className="whitespace-nowrap">Não tem uma conta?</Typography>
+                  <Button
+                    className="underline text-md px-2"
                     onClick={() => setIsFlipped(!isFlipped)}
                   >
                     Registre-se
-                  </button>
+                  </Button>
                 </div>
               </LoginForm>
               <div className="md:flex md:flex-col hidden">
-                <h1 className="text-lg font-medium mb-2">Não tem uma conta?</h1>
-                <AnimatedGradientButton
-                  className="mt-2 rounded-md px-5 py-2.5 text-center text-sm font-medium outline-none"
-                  type="button"
-                  onClick={() => setIsFlipped(!isFlipped)}
+                <Typography variant="span" className="whitespace-nowrap">Não tem uma conta?</Typography>
+                <Button
+                  variant="gradient"
+                  bgHexColor={buttonColor.primary}
+                  onClick={() => setIsFlipped(!isFlipped)}    
                 >
                   Registre-se
-                </AnimatedGradientButton>
+                </Button>
               </div>
             </>
           )}
@@ -48,32 +49,31 @@ export default function Home() {
             <>
               <RegisterForm className="md:hidden flex items-center">
                 <div className="flex items-center mt-2">
-                  <p className="text-md font-medium">Já possui uma conta?</p>
-                  <button
-                    className="text-md font-medium ml-2 underline"
-                    type="button"
+                  <Typography variant="span" className="whitespace-nowrap">Já possui uma conta?</Typography>
+                  <Button
+                    className="underline text-md px-2"
                     onClick={() => setIsFlipped(!isFlipped)}
                   >
                     Login
-                  </button>
+                  </Button>
                 </div>
               </RegisterForm>
               <div className="md:flex flex-col hidden">
-                <h1 className="text-lg font-medium mb-2">Já possui uma conta?</h1>
-                <AnimatedGradientButton
-                  className="mt-2 rounded-md px-5 py-2.5 text-center text-sm font-medium outline-none"
-                  type="button"
-                  onClick={() => setIsFlipped(!isFlipped)}
+                <Typography variant="span" className="whitespace-nowrap">Já possui uma conta?</Typography>
+                <Button
+                  variant="gradient"
+                  bgHexColor={buttonColor.primary}
+                  onClick={() => setIsFlipped(!isFlipped)}    
                 >
                   Login
-                </AnimatedGradientButton>
+                </Button>
               </div>
             </>
           )}
         />
-        <RegisterForm className="md:flex w-full items-center hidden bg-zinc-900 backdrop-blur-lg border border-l-0 border-zinc-800" />
+        <RegisterForm className="md:flex w-full items-center hidden bg-zinc-900 border border-l-0 border-zinc-800" />
       </section>
-        <Image src="/background.jpg" fill alt="" className="object-cover -z-50 opacity-40" />
+      <Image src="/background.jpg" fill alt="" className="object-cover -z-50 opacity-40" />
     </main>
   );
 }

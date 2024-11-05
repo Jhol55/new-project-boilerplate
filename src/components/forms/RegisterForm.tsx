@@ -5,8 +5,9 @@ import { ControlledInput } from "@/components/custom-ui/ControlledInput"
 import { cn } from "@/lib/utils"
 import { FieldValues, UseFormSetError } from "react-hook-form"
 import { userService } from "@/services/user"
-import { ControlledAnimatedGradientButton } from "@/components/custom-ui/ControlledAnimatedGradientButton"
 import { useRouter } from "next/navigation";
+import { buttonColor } from "@/constants/colors"
+import { ControlledButton } from "../custom-ui/controlled-button"
 
 
 interface IRegisterForm {
@@ -26,7 +27,7 @@ interface IInputs {
 export const RegisterForm = ({ className, children }: IRegisterForm) => {
     const baseId = useId();
     const router = useRouter();
-    
+
     const inputs = [
         {
             label: "Nome de usuário",
@@ -58,7 +59,7 @@ export const RegisterForm = ({ className, children }: IRegisterForm) => {
 
     const handleSubmit = async (data: FieldValues, setError: UseFormSetError<FieldValues>) => {
         const response = await userService.register(data);
-        
+
         if (!response.success) {
             setError("email", {
                 message: "Email já cadastrado"
@@ -102,12 +103,12 @@ export const RegisterForm = ({ className, children }: IRegisterForm) => {
                 </React.Fragment>
             ))}
 
-            <ControlledAnimatedGradientButton
-                className="w-full mt-2 rounded-md px-5 py-2.5 text-center text-sm font-medium outline-none"
-                type="submit"
+            <ControlledButton
+                variant="gradient"
+                bgHexColor={buttonColor.primary}
             >
-                Registrar
-            </ControlledAnimatedGradientButton>
+                Registre-se
+            </ControlledButton>
 
             {children}
 
