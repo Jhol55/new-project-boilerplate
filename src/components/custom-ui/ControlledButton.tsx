@@ -1,9 +1,9 @@
 import { useState, forwardRef, useMemo } from "react";
-import { Button } from "./button";
-import { MultiVariantButtonProps } from "@/types/button.type";
+import { Button } from "./Button";
+import { MultiVariantButtonProps } from "@/types/Button.types";
 import { Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useControlledFormContext } from "./controlled-form";
+import { useControlledFormContext } from "./ControlledForm";
 
 
 const ControlledButton = forwardRef<HTMLButtonElement, MultiVariantButtonProps>(

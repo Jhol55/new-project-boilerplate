@@ -1,17 +1,6 @@
 import React from "react";
 import { cn } from "@/lib/utils"
-
-interface ITypography {
-    children: React.ReactNode;
-    variant?: "p" | "b" | "span" | "label" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
-    color?: 'text-white' | 'text-black';
-    className?: string;
-}
-
-interface LabelProps extends ITypography {
-    variant: "label"
-    htmlFor: string
-}
+import { TypographyProps } from "@/types/Typography.types";
 
 export const Typography = ({
     className, 
@@ -19,7 +8,7 @@ export const Typography = ({
     variant = 'p', 
     children, 
     ...props 
-} : ITypography | LabelProps) => {
+} : TypographyProps) => {
     const Component = variant;
 
     const styles = {

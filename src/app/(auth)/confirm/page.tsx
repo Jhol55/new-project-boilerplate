@@ -1,9 +1,9 @@
 "use client"
 
-import { Button } from "@/components/custom-ui/button";
-import { Container } from "@/components/custom-ui/container";
-import { Typography } from "@/components/custom-ui/typography";
-import { ConfirmEmailForm } from "@/components/forms/confirmEmailForm";
+import { Button } from "@/components/custom-ui/Button";
+import { Container } from "@/components/custom-ui/Container";
+import { Typography } from "@/components/custom-ui/Typography";
+import { ConfirmEmailForm } from "@/components/forms/ConfirmEmailForm";
 import { backgroundColor } from "@/constants/colors";
 import { useUser } from "@/hooks/useUser";
 import Image from "next/image";

@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import { cn } from "@/lib/utils";
 import { darkenColor } from "@/utils/darkenColor";
-import { MultiVariantButtonProps } from "@/types/button.type";
+import { MultiVariantButtonProps } from "@/types/Button.types";
 
 const Button = forwardRef<HTMLButtonElement, MultiVariantButtonProps>(
     ({ variant = "default", type = "button", bgHexColor, animated = true, className, children, ...props }, ref) => {

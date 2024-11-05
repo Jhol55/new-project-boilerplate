@@ -1,15 +1,8 @@
-import { ChangeEvent, InputHTMLAttributes } from "react";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "../ui/input-otp"
-import { useControlledFormContext } from "./controlled-form";
+import { useControlledFormContext } from "./ControlledForm";
+import { ControlledInputOTPProps } from "@/types/ControlledInputOTP.types";
 
-interface IFormInputOTP extends InputHTMLAttributes<HTMLInputElement> {
-    fieldName: keyof Record<string, (e: ChangeEvent<HTMLInputElement>) => void>;
-    length: number;
-    containerClassName?: string;
-    className?: string;
-}
-
-export const ControlledInputOTP = ({ fieldName, length, containerClassName, className }: IFormInputOTP) => {
+export const ControlledInputOTP = ({ fieldName, length, containerClassName, className }: ControlledInputOTPProps) => {
     const { errors, register, setForm } = useControlledFormContext();
 
     return (
