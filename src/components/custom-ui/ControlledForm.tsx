@@ -17,9 +17,14 @@ export const useControlledFormContext = () => {
 };
 
 
-const ControlledForm = forwardRef<HTMLFormElement, ControlledFormProps>(
-    ({ onSubmit, onChange, children, zodSchema, maskFunctions, ...props}, ref) => {
-
+const ControlledForm = forwardRef<HTMLFormElement, ControlledFormProps>(({
+    onSubmit,
+    onChange,
+    children,
+    zodSchema,
+    maskFunctions,
+    ...props
+}, ref) => {
     const { register, handleSubmit, setError, formState: { errors, isSubmitting, isSubmitSuccessful } } = useForm({
         resolver: zodSchema ? zodResolver(zodSchema) : undefined,
     });
