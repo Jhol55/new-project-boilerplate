@@ -1,10 +1,5 @@
 
-
-export interface ControlledInputProps {
-    label?: string
-    placeholder?: string
-    fieldName: string
-    type?: string
-    className?: string
-    includeInForm?: boolean
+export interface ControlledInputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "onChange" | "onInput"> {
+    fieldName: keyof Record<string, (e: ChangeEvent<HTMLInputElement>) => void>;
+    includeInForm?: boolean;
 }

@@ -2,7 +2,12 @@ import { InputOTP, InputOTPGroup, InputOTPSlot } from "../ui/input-otp"
 import { useControlledFormContext } from "./ControlledForm";
 import { ControlledInputOTPProps } from "@/types/ControlledInputOTP.types";
 
-export const ControlledInputOTP = ({ fieldName, length, containerClassName, className }: ControlledInputOTPProps) => {
+export const ControlledInputOTP = ({
+    fieldName,
+    length,
+    containerClassName,
+    className
+}: ControlledInputOTPProps) => {
     const { errors, register, setForm } = useControlledFormContext();
 
     return (
@@ -11,7 +16,7 @@ export const ControlledInputOTP = ({ fieldName, length, containerClassName, clas
                 containerClassName={containerClassName}
                 className={className}
                 maxLength={length}
-                {...register(fieldName)}
+                {...register(fieldName)} // ref
                 onChange={undefined}
                 onInput={(e: React.ChangeEvent<HTMLInputElement>) => {
                     setForm((prev) => ({

@@ -2,7 +2,11 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { FlipCardProps } from "@/types/FlipCard.types";
 
-export const FlipCard = ({ renderFront, renderBack, className }: FlipCardProps ) => {
+export const FlipCard = ({
+    renderFront,
+    renderBack,
+    className
+}: FlipCardProps) => {
     const [isFlipped, setIsFlipped] = useState(false);
 
     return (
@@ -22,9 +26,9 @@ export const FlipCard = ({ renderFront, renderBack, className }: FlipCardProps )
                 )}
                 style={{ backfaceVisibility: "hidden" }}
             >
-                {renderFront && renderFront(isFlipped, setIsFlipped)}          
+                {renderFront && renderFront(isFlipped, setIsFlipped)}
             </div>
-            
+
             <div
                 className={cn(
                     "absolute flex flex-col justify-center items-center backdrop-blur-lg",
