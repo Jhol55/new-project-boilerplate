@@ -1,11 +1,11 @@
 import { confirmEmailFormSchema } from "@/schemas/confirmEmailForm.schema"
-import { ControlledForm } from "../custom-ui/controlled-form"
-import { ControlledInputOTP } from "../custom-ui/controlled-input-otp"
+import { ControlledForm } from "../custom-ui/ControlledForm"
+import { ControlledInputOTP } from "../custom-ui/ControlledInputOTP"
 import { FieldValues, UseFormSetError } from "react-hook-form"
 import { useRouter } from "next/navigation"
 import { userService } from "@/services/user"
 import { useUser } from "@/hooks/useUser"
-import { ControlledButton } from "../custom-ui/controlled-button"
+import { ControlledButton } from "../custom-ui/ControlledButton"
 import { buttonColor } from "@/constants/colors"
 
 

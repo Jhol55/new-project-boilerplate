@@ -1,5 +1,5 @@
-import { ControlledForm } from "@/components/custom-ui/controlled-form"
-import { ControlledInput } from "@/components/custom-ui/controlled-input"
+import { ControlledForm } from "@/components/custom-ui/ControlledForm"
+import { ControlledInput } from "@/components/custom-ui/ControlledInput"
 import { cn } from "@/lib/utils"
 import React, { useId } from "react"
 import Link from "next/link"
@@ -8,24 +8,12 @@ import { userService } from "@/services/user"
 import { loginFormSchema } from "@/schemas/loginForm.schema"
 import { useRouter } from "next/navigation";
 import { backgroundColor, buttonColor } from "@/constants/colors"
-import { ControlledButton } from "../custom-ui/controlled-button"
-import { Typography } from "../custom-ui/typography"
+import { ControlledButton } from "../custom-ui/ControlledButton"
+import { Typography } from "../custom-ui/Typography"
+import { ControlledInputProps } from "@/types/ControlledInput.types"
 
-interface ILoginForm {
-    className?: string,
-    children?: React.ReactNode
-}
 
-interface IInputs {
-    label?: string
-    placeholder?: string
-    fieldName: string
-    type?: string
-    className?: string
-    includeOnSubmit?: boolean
-}
-
-export const LoginForm = ({ className, children }: ILoginForm) => {
+export const LoginForm = ({ className, children }: { className?: string, children?: React.ReactNode }) => {
     const baseId = useId();
     const router = useRouter();
 
@@ -65,7 +53,7 @@ export const LoginForm = ({ className, children }: ILoginForm) => {
         >
             <div className="h-full" /> {/* justify-center when overflow */}
 
-            {inputs.map((input: IInputs, index) => (
+            {inputs.map((input: ControlledInputProps, index) => (
                 <React.Fragment key={index}>
 
                     <Typography variant="label" htmlFor={`${baseId}-${index}`}>

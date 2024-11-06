@@ -1,14 +1,16 @@
 import { cn } from "@/lib/utils";
 
-interface ContainerProps {
-    variant: "main" | "section" | "article";
-    color?: string;
-    className?: string;
-    children?: React.ReactNode;
-    style?: React.CSSProperties; 
-}
+import { ContainerProps } from "@/types/Container.types";
+import { forwardRef } from "react";
 
-export const Container = ({ variant, color, className, children, style, ...props }: ContainerProps) => {
+const Container = forwardRef<HTMLElement, ContainerProps>(({
+    variant,
+    color,
+    className,
+    children,
+    style,
+    ...props
+}, ref) => {
     const Component = variant;
 
     const styles = {
@@ -19,6 +21,7 @@ export const Container = ({ variant, color, className, children, style, ...props
 
     return (
         <Component
+            ref={ref}
             {...props}
             className={cn(styles[variant], color, className)}
             style={style}
@@ -26,4 +29,8 @@ export const Container = ({ variant, color, className, children, style, ...props
             {children}
         </Component>
     );
-};
+})
+
+Container.displayName = "Container";
+
+export { Container };

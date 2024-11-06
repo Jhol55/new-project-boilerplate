@@ -1,15 +1,12 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { FlipCardProps } from "@/types/FlipCard.types";
 
-interface IFlipCard {
-    front?: { children?: React.ReactNode, flipButton?: React.ReactElement }
-    back?: { children?: React.ReactNode, flipButton?: React.ReactElement }
-    renderFront?: (isFlipped: boolean, setIsFlipped: Dispatch<SetStateAction<boolean>>) => React.ReactNode
-    renderBack?: (isFlipped: boolean, setIsFlipped: Dispatch<SetStateAction<boolean>>) => React.ReactNode
-    className?: string
-}
-
-export const FlipCard = ({ renderFront, renderBack, className }: IFlipCard) => {
+export const FlipCard = ({
+    renderFront,
+    renderBack,
+    className
+}: FlipCardProps) => {
     const [isFlipped, setIsFlipped] = useState(false);
 
     return (
@@ -29,9 +26,9 @@ export const FlipCard = ({ renderFront, renderBack, className }: IFlipCard) => {
                 )}
                 style={{ backfaceVisibility: "hidden" }}
             >
-                {renderFront && renderFront(isFlipped, setIsFlipped)}          
+                {renderFront && renderFront(isFlipped, setIsFlipped)}
             </div>
-            
+
             <div
                 className={cn(
                     "absolute flex flex-col justify-center items-center backdrop-blur-lg",

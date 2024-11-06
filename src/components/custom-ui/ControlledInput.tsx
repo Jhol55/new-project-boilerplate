@@ -1,25 +1,20 @@
 "use client";
 
-import { ChangeEvent, InputHTMLAttributes } from 'react';
-import { useControlledFormContext } from './controlled-form';
-
-interface IFormInput extends Omit<InputHTMLAttributes<HTMLInputElement>, "onChange"> {
-    fieldName: keyof Record<string, (e: ChangeEvent<HTMLInputElement>) => void>;
-    includeInForm?: boolean;
-}
+import { useControlledFormContext } from './ControlledForm';
+import { ControlledInputProps } from '@/types/ControlledInput.types';
 
 export const ControlledInput = ({
     fieldName,
     includeInForm = true,
     ...props
-}: IFormInput) => {
+}: ControlledInputProps) => {
     const { register, errors, maskFunctions, setForm } = useControlledFormContext();
 
     return (
         <>
             <input
                 {...props}
-                {...register(fieldName)}
+                {...register(fieldName)} // ref
                 autoComplete={props?.autoComplete || "on"}
                 onInput={(e: React.ChangeEvent<HTMLInputElement>) => maskFunctions && maskFunctions[fieldName](e)}
                 onChange={(e) => {
