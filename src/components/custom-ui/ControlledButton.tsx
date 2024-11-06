@@ -3,7 +3,7 @@ import { Button } from "./Button";
 import { MultiVariantButtonProps } from "@/types/Button.types";
 import { Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useControlledFormContext } from "./ControlledForm";
+import { useControlledForm } from "@/hooks/useControlledForm";
 
 
 const ControlledButton = forwardRef<HTMLButtonElement, MultiVariantButtonProps>(({
@@ -12,7 +12,7 @@ const ControlledButton = forwardRef<HTMLButtonElement, MultiVariantButtonProps>(
     ...props
 }, ref) => {
     const [isLoading, setIsLoading] = useState(false);
-    const { isSubmitting, isSubmitSuccessful } = useControlledFormContext();
+    const { isSubmitting, isSubmitSuccessful } = useControlledForm();
 
     useMemo(() => {
         const timeout = setTimeout(() => {

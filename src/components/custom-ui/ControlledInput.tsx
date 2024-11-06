@@ -1,6 +1,6 @@
 "use client";
 
-import { useControlledFormContext } from './ControlledForm';
+import { useControlledForm } from "@/hooks/useControlledForm";
 import { ControlledInputProps } from '@/types/ControlledInput.types';
 
 export const ControlledInput = ({
@@ -8,7 +8,7 @@ export const ControlledInput = ({
     includeInForm = true,
     ...props
 }: ControlledInputProps) => {
-    const { register, errors, maskFunctions, setForm } = useControlledFormContext();
+    const { register, errors, maskFunctions, setForm } = useControlledForm();
 
     return (
         <>
