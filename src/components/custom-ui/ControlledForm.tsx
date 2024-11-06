@@ -1,20 +1,10 @@
 "use client";
 
-import React, { createContext, forwardRef, useContext, useMemo, useState } from 'react';
+import React, { forwardRef, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { ControlledFormContextProps, ControlledFormProps } from '@/types/ControlledForm.types';
-
-
-const ControlledFormContext = createContext<ControlledFormContextProps | null>(null);
-
-export const useControlledFormContext = () => {
-    const context = useContext(ControlledFormContext);
-    if (!context) {
-        throw new Error('useControlledFormContext must be used within a FormProvider');
-    }
-    return context;
-};
+import { ControlledFormProps } from '@/types/ControlledForm.types';
+import { ControlledFormContext } from '@/contexts/ControlledFormContext';
 
 
 const ControlledForm = forwardRef<HTMLFormElement, ControlledFormProps>(({

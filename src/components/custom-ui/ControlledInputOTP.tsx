@@ -1,5 +1,5 @@
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "../ui/input-otp"
-import { useControlledFormContext } from "./ControlledForm";
+import { useControlledForm } from "@/hooks/useControlledForm";
 import { ControlledInputOTPProps } from "@/types/ControlledInputOTP.types";
 
 export const ControlledInputOTP = ({
@@ -8,7 +8,7 @@ export const ControlledInputOTP = ({
     containerClassName,
     className
 }: ControlledInputOTPProps) => {
-    const { errors, register, setForm } = useControlledFormContext();
+    const { errors, register, setForm } = useControlledForm();
 
     return (
         <div className="w-fit mx-auto">
