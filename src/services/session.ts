@@ -4,7 +4,13 @@ import { NextRequest, NextResponse } from 'next/server';
 
 
 export class sessionService {
-    private static key: Uint8Array = new TextEncoder().encode(process.env.NEXT_PUBLIC_SECRET_KEY || '');
+    private static get key(): Uint8Array {
+        const secretKey = process.env.NEXT_PUBLIC_SECRET_KEY;
+        if (!secretKey) {
+            throw new Error("Secret key is required");
+        }
+        return new TextEncoder().encode(secretKey);
+    }
 
     private static async encrypt(payload: JWTPayload, time: number): Promise<string> {
         return await new SignJWT(payload)
@@ -63,8 +69,4 @@ export class sessionService {
         });
         return res;
     }
-}
-
-if (!process.env.NEXT_PUBLIC_SECRET_KEY) {
-    throw new Error("Secret key is required");
 }
