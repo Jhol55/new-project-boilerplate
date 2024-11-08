@@ -13,6 +13,7 @@ const ControlledForm = forwardRef<HTMLFormElement, ControlledFormProps>(({
     children,
     zodSchema,
     maskFunctions,
+    autoComplete = "on",
     ...props
 }, ref) => {
     const { register, handleSubmit, setError, formState: { errors, isSubmitting, isSubmitSuccessful } } = useForm({
@@ -22,9 +23,7 @@ const ControlledForm = forwardRef<HTMLFormElement, ControlledFormProps>(({
     const [form, setForm] = useState({});
 
     useMemo(() => {
-        if (onChange) {
-            onChange(form);
-        }
+        onChange?.(form);
     }, [form, onChange]);
 
     return (
@@ -32,8 +31,8 @@ const ControlledForm = forwardRef<HTMLFormElement, ControlledFormProps>(({
             <form
                 ref={ref}
                 {...props}
-                onSubmit={onSubmit && handleSubmit(() => onSubmit(form, setError))}
-                autoComplete={props.autoComplete || "on"}
+                onSubmit={handleSubmit(() => onSubmit?.(form, setError))}
+                autoComplete={autoComplete}
             >
                 {children}
             </form>
