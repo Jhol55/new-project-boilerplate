@@ -14,15 +14,18 @@ const Button = forwardRef<HTMLButtonElement, MultiVariantButtonProps>(({
 }, ref) => {
 
     const animatedStyle = "transition-[background] duration-700 hover:bg-right-top";
+
     const defaultStyle = cn(
         "bg-[280%_auto] w-full text-white sm:text-sm md:text-md text-center font-medium cursor-pointer rounded-md py-2.5", 
         variant === "default" ? "px-2" : "px-5"
     );
+
     const classNames = cn(
         defaultStyle, 
         variant === "gradient" && animated && animatedStyle, 
         className
     );
+    
     const darkenedBackgroundColor = darkenColor(bgHexColor, 0.22);
     const gradientBackground = `linear-gradient(325deg, ${darkenedBackgroundColor} 0%, ${bgHexColor} 55%, ${darkenedBackgroundColor} 90%)`;
     

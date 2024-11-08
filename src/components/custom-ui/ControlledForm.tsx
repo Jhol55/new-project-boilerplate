@@ -4,7 +4,7 @@ import React, { forwardRef, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ControlledFormProps } from '@/types/ControlledForm.types';
-import { ControlledFormContext } from '@/contexts/ControlledFormContext';
+import { ControlledFormProvider } from '@/contexts/ControlledFormContext';
 
 
 const ControlledForm = forwardRef<HTMLFormElement, ControlledFormProps>(({
@@ -28,7 +28,7 @@ const ControlledForm = forwardRef<HTMLFormElement, ControlledFormProps>(({
     }, [form, onChange]);
 
     return (
-        <ControlledFormContext.Provider value={{ register, setError, errors, maskFunctions, form, setForm, isSubmitting, isSubmitSuccessful }}>
+        <ControlledFormProvider value={{ register, setError, errors, maskFunctions, form, setForm, isSubmitting, isSubmitSuccessful }}>
             <form
                 ref={ref}
                 {...props}
@@ -37,7 +37,7 @@ const ControlledForm = forwardRef<HTMLFormElement, ControlledFormProps>(({
             >
                 {children}
             </form>
-        </ControlledFormContext.Provider>
+        </ControlledFormProvider>
     );
 });
 
