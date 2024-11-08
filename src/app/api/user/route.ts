@@ -9,7 +9,7 @@ export async function GET() {
 
     const { data } = await supabase
         .from("users")
-        .select("email, username")
+        .select("*")
         .eq("email", email)
         .single();
 
